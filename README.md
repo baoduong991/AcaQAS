@@ -1,7 +1,7 @@
 # **AcaQAS: An Academic Question Answering System Based on Finetuning Large Language Models**
 ## Proposed architectures
 
-### The Transformer Architecture
+### The Transformer architecture
 ![Biểu đồ kết quả](architecture/transformer_architecture.png)
 
 ### Bloom architecture
