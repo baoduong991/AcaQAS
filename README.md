@@ -10,6 +10,23 @@
 ## Datasets:
 Pile dataset 
 Website to the [original dataset](https://github.com/EleutherAI/the-pile)
+
+### 🔧 Training Configuration
+| Parameter                    | Value                          |
+|-----------------------------|---------------------------------|
+| **Model**                   | Bloomz-mt-7B / LLaMA-7B         |
+| **GPU Environment**         | Google Colab Pro (Tesla T4, 16GB VRAM) |
+| **LoRA Rank**               | 8                               |
+| **LoRA Alpha**              | 16                              |
+| **LoRA Dropout**            | 0.05                            |
+| **Number of Epochs**        | 3                               |
+| **Batch Size**              | 4 (gradient accumulation = 8)   |
+| **Learning Rate**           | 2e-4                            |
+| **Optimizer**               | AdamW                           |
+| **Warmup Ratio**            | 0.03                            |
+| **Sequence Length**         | 512 tokens                      |
+| **Precision**               | 8-bit (`bitsandbytes`)          |
+| **Frameworks**              | PyTorch, Hugging Face Transformers |
 ## Result
 
 | Prompt |	Response |
@@ -36,23 +53,58 @@ Website to the [original dataset](https://github.com/EleutherAI/the-pile)
 | LLaMA-7B (Pre-Fine-Tuning) |	6.1 |	5.9 |	5.7 |	5.8	| 5.88 |
 | LLaMA-7B (Post-Fine-Tuning) |	7.7 |	7.8 |	7.5 |	7.6 |	7.65 |
 
-### 🔧 Training Configuration
+### To finetune the model using LoRA and 8-bit quantization, run:
+### Fine-tuning Command (Bloomz-7B1-mt on Academic QA Dataset)
 
-| Parameter                    | Value                          |
-|-----------------------------|---------------------------------|
-| **Model**                   | Bloomz-mt-7B / LLaMA-7B         |
-| **GPU Environment**         | Google Colab Pro (Tesla T4, 16GB VRAM) |
-| **LoRA Rank**               | 8                               |
-| **LoRA Alpha**              | 16                              |
-| **LoRA Dropout**            | 0.05                            |
-| **Number of Epochs**        | 3                               |
-| **Batch Size**              | 4 (gradient accumulation = 8)   |
-| **Learning Rate**           | 2e-4                            |
-| **Optimizer**               | AdamW                           |
-| **Warmup Ratio**            | 0.03                            |
-| **Sequence Length**         | 512 tokens                      |
-| **Precision**               | 8-bit (`bitsandbytes`)          |
-| **Frameworks**              | PyTorch, Hugging Face Transformers |
+Run the following command to fine-tune `bigscience/bloomz-7b1-mt` on `val.json` using LoRA and 8-bit quantization:
+<pre><code>
+```bash
+python finetune_bloomz_instruct.py \
+    --base_model 'bigscience/bloomz-7b1-mt' \
+    --data_path 'val.json' \
+    --output_dir './bloomz-acaqas-val' \
+    --batch_size 2 \
+    --micro_batch_size 2 \
+    --num_epochs 3 \
+    --learning_rate 2e-5 \
+    --cutoff_len 512 \
+    --val_set_size 1 \
+    --lora_r 8 \
+    --lora_alpha 16 \
+    --lora_dropout 0.05 \
+    --train_on_inputs False \
+    --add_eos_token True \
+    --logging_steps 10 \
+    --save_steps 50 \
+    --eval_steps 25 \
+    --save_total_limit 2 \
+    --load_in_8bit True
+```
+</code></pre>
 
-
+### Fine-tuning Command (LLaMA-7B on Academic QA Dataset)
+Run the following command to fine-tune `decapoda-research/llama-7b-hf` using LoRA with 8-bit quantization:
+<pre><code>
+```bash
+python finetune_llama_instruct.py \
+    --base_model 'decapoda-research/llama-7b-hf' \
+    --data_path 'val.json' \
+    --output_dir './llama-acaqas-val' \
+    --batch_size 2 \
+    --micro_batch_size 2 \
+    --num_epochs 3 \
+    --learning_rate 2e-5 \
+    --cutoff_len 512 \
+    --val_set_size 1 \
+    --lora_r 8 \
+    --lora_alpha 16 \
+    --lora_dropout 0.05 \
+    --train_on_inputs False \
+    --add_eos_token True \
+    --logging_steps 10 \
+    --save_steps 50 \
+    --eval_steps 25 \
+    --save_total_limit 2 \
+    --load_in_8bit True
+</code></pre>
 
