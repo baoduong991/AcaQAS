@@ -49,13 +49,10 @@ Website to the [original dataset](https://github.com/EleutherAI/the-pile)
 | **Batch Size**              | 4 (gradient accumulation = 8)   |
 | **Learning Rate**           | 2e-4                            |
 | **Optimizer**               | AdamW                           |
-| **Scheduler**               | Linear with warmup              |
 | **Warmup Ratio**            | 0.03                            |
 | **Sequence Length**         | 512 tokens                      |
-| **Gradient Clipping**       | 1.0                             |
 | **Precision**               | 8-bit (`bitsandbytes`)          |
 | **Frameworks**              | PyTorch, Hugging Face Transformers |
-| **Training Duration**       | ~6 hours per model              |
 
 
 
