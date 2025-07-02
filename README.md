@@ -36,3 +36,26 @@ Website to the [original dataset](https://github.com/EleutherAI/the-pile)
 | LLaMA-7B (Pre-Fine-Tuning) |	6.1 |	5.9 |	5.7 |	5.8	| 5.88 |
 | LLaMA-7B (Post-Fine-Tuning) |	7.7 |	7.8 |	7.5 |	7.6 |	7.65 |
 
+### 🔧 Training Configuration
+
+| Parameter                    | Value                          |
+|-----------------------------|---------------------------------|
+| **Model**                   | Bloomz-mt-7B / LLaMA-7B         |
+| **GPU Environment**         | Google Colab Pro (Tesla T4, 16GB VRAM) |
+| **LoRA Rank**               | 8                               |
+| **LoRA Alpha**              | 16                              |
+| **LoRA Dropout**            | 0.05                            |
+| **Number of Epochs**        | 3                               |
+| **Batch Size**              | 4 (gradient accumulation = 8)   |
+| **Learning Rate**           | 2e-4                            |
+| **Optimizer**               | AdamW                           |
+| **Scheduler**               | Linear with warmup              |
+| **Warmup Ratio**            | 0.03                            |
+| **Sequence Length**         | 512 tokens                      |
+| **Gradient Clipping**       | 1.0                             |
+| **Precision**               | 8-bit (`bitsandbytes`)          |
+| **Frameworks**              | PyTorch, Hugging Face Transformers |
+| **Training Duration**       | ~6 hours per model              |
+
+
+
