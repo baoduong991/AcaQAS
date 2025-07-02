@@ -45,7 +45,7 @@ Website to the [original dataset](https://github.com/EleutherAI/the-pile)
 | Define the term "Big O notation" in algorithm analysis.	| Big O notation describes the upper bound of an algorithm's time or space complexity, representing its worst-case growth rate relative to input size.
 | Define the concept of a prime number.	 | A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.
 
-### Evaluation Results of Fine-Tuned Models on Academic QA Task
+### Metric-Based Evaluation Results of Fine-Tuned Models.
 | Model	Accuracy (%)	| Precision (%)	| Recall (%)	| F1 Score (%)
 | ------------- | ------------- |------------- |------------- |
 | LLaMA-7B (Pre-Fine-Tuning) |	68.5 |	70.2 |	66.8 |	68.4 |
@@ -53,13 +53,31 @@ Website to the [original dataset](https://github.com/EleutherAI/the-pile)
 | Bloomz (Pre-Fine-Tuning)	| 69.3	| 71.0 |	67.2 |	69.0 |
 | Bloomz (Post-Fine-Tuning) |	81.2 |	83.5 |	79.8 |	81.6 |
 
-### AI Evaluation Results Using LLM Arbitration (GPT-4o) on MT-Bench Reasoning Set
+### LLM-Based Evaluation on MT-Bench Reasoning Set
 | Model	Average Relevance Score |	Average Helpfulness Score |	Average Accuracy Score |	Average Level of Detail Score |	Overall Average Score (1-10) |
 | ------------- | ------------- |------------- |------------- |------------- |
 | Bloomz (Pre-Fine-Tuning) |	6.3 |	6.0 |	5.8 |	6.1 |	6.05 |
 | Bloomz (Post-Fine-Tuning) |	8.0	| 8.2 |	8.1 |	8.0 |	8.08 |
 | LLaMA-7B (Pre-Fine-Tuning) |	6.1 |	5.9 |	5.7 |	5.8	| 5.88 |
 | LLaMA-7B (Post-Fine-Tuning) |	7.7 |	7.8 |	7.5 |	7.6 |	7.65 |
+
+## 📊 Comparative Performance on Academic QA Benchmark
+
+| Model           | Params | Method                          | Accuracy (%) | F1 Score (%) |
+|----------------|--------|----------------------------------|--------------|--------------|
+| Alpaca-7B       | 7B     | Instruction Tuning (Stanford-52K) | 67.3         | 66.9         |
+| AcaQAS (Ours)   | 7B     | LoRA + Academic Alignment        | 78.9         | 79.1         |
+
+## ❗ Sample Failure Cases in Academic QA
+
+| Prompt                                                            | Generated Response                                                            | Issue Type           | Notes                                                                                       |
+|------------------------------------------------------------------|--------------------------------------------------------------------------------|----------------------|---------------------------------------------------------------------------------------------|
+| Compare supervised and unsupervised learning in machine learning. | “Supervised learning is better than unsupervised learning because it uses more data.” | Oversimplification    | Lacks contrastive analysis and misses key concepts like labeled vs. unlabeled data.         |
+| What does the AUC metric evaluate?                                | “AUC measures the recall of a classification model.”                           | Factual Error         | Incorrect definition; AUC measures the trade-off between TPR and FPR, not recall.           |
+| Define the concept of epistemology in philosophy.                | “Epistemology is the study of how science works in society.”                   | Hallucination         | Confuses epistemology with sociology of science; not grounded in standard definitions.      |
+| Explain the P=NP problem in theoretical computer science.         | “P=NP means that all math problems can be solved easily by a computer.”        | Inaccuracy            | Misleading simplification of a core complexity theory question.                             |
+| Describe the function of mitochondria in eukaryotic cells.       | “Mitochondria help plants photosynthesize energy.”                             | Domain Confusion      | Confuses plant chloroplasts with mitochondria.                                               |
+| What is the derivative of f(x) = sin(x)?                         | “The derivative of sin(x) is -sin(x).”                                         | Factual Error         | Incorrect derivative; should be cos(x).                                                     |
 
 ### To finetune the model using LoRA and 8-bit quantization, run:
 ### Fine-tuning Command (Bloomz-7B1-mt on Academic QA Dataset)
