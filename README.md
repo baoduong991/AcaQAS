@@ -58,7 +58,6 @@ Website to the [original dataset](https://github.com/EleutherAI/the-pile)
 
 Run the following command to fine-tune `bigscience/bloomz-7b1-mt` on `val.json` using LoRA and 8-bit quantization:
 <pre><code>
-```bash
 python finetune_bloomz_instruct.py \
     --base_model 'bigscience/bloomz-7b1-mt' \
     --data_path 'val.json' \
@@ -79,13 +78,10 @@ python finetune_bloomz_instruct.py \
     --eval_steps 25 \
     --save_total_limit 2 \
     --load_in_8bit True
-```
 </code></pre>
-
 ### Fine-tuning Command (LLaMA-7B on Academic QA Dataset)
 Run the following command to fine-tune `decapoda-research/llama-7b-hf` using LoRA with 8-bit quantization:
 <pre><code>
-```bash
 python finetune_llama_instruct.py \
     --base_model 'decapoda-research/llama-7b-hf' \
     --data_path 'val.json' \
