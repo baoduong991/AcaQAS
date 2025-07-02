@@ -1,4 +1,11 @@
 # **AcaQAS: An Academic Question Answering System Based on Finetuning Large Language Models**
+AcaQAS is an open academic QA system based on LoRA fine-tuning of open-source LLMs (Bloomz and LLaMA-7B). This repository includes the dataset, training scripts, evaluation benchmarks, and results for adapting LLMs to domain-specific academic question answering under resource constraints.
+
+**Base Models**  
+- [Bloomz-mt-7B](https://huggingface.co/bigscience/bloomz)
+- [LLaMA-7B (HF-compatible)](https://huggingface.co/decapoda-research/llama-7b-hf)
+
+
 ## Proposed architectures
 
 ### The Transformer architecture
@@ -9,6 +16,7 @@
 
 ## Datasets:
 Pile dataset 
+We used a subset of [The Pile dataset](https://pile.eleuther.ai/) containing academic sources (arXiv, PubMed, PhilPapers, etc.).
 Website to the [original dataset](https://github.com/EleutherAI/the-pile)
 
 ### 🔧 Training Configuration
@@ -103,4 +111,3 @@ python finetune_llama_instruct.py \
     --save_total_limit 2 \
     --load_in_8bit True
 </code></pre>
-
